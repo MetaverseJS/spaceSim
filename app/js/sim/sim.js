@@ -127,10 +127,10 @@ const addShip = scene => {
     objLoader.setMaterials(materials)
     objLoader.load('ship.obj', (object) => {
       object.position.x = 0
-      object.position.y = -5000000000
-      object.position.z = 5000000000
+      object.position.y = -350000000000
+      object.position.z = 350000000000
       object.scale.set(20, 20, 20)
-      object.rotation.set(1, -0.25, -0.25)
+      object.rotation.set(0.5, -0.25, -0.25)
       object.name = 'spaceShip'
 
       Void.ship = object

@@ -132,6 +132,8 @@ const particleEmitterOptions = {
 }
 
 const createStar = ({ radius, position, color, time = 0 }) => {
+  radius *= 50
+
   let rgb
   if (typeof color === 'string') {
     // TODO: remove this UI hack

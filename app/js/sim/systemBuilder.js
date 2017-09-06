@@ -270,7 +270,7 @@ const G = 2.93558 * Math.pow(10, -4)
 const epsilon = 0.01
 
 class soPhysics {
-  constructor (aSystem, maxMark = 100000, dt = 0.02,metric=false, GPGPU = false) {
+  constructor (aSystem, maxMark = 100000, dt = 0.02, metric = false, GPGPU = false) {
     this.dt = dt
     this.system = aSystem
     this.metric = metric
@@ -283,27 +283,25 @@ class soPhysics {
     this.count = 1
     this.tryCount = 0
 
-    if(GPGPU){
-      try{
-        //this.initGPUStuff()
-      }catch(except){
-        console.log(except);
-      }
-
+    if (GPGPU) {
+      try {
+        // this.initGPUStuff()
+      } catch (except) {
+        console.log(except)
       }
     }
+  }
 
-
-  initGPUStuff(){
+  initGPUStuff () {
     this.gpu = new GPU()
     this.gpgpu = true
     console.log(this.gridSystem.pos)
 
-    const myFunc = this.gpu.createKernel(function(pos) {
-    return pos;
-  }).setOutput([3,512]);
+    const myFunc = this.gpu.createKernel((pos) => {
+      return pos
+    }).setOutput([ 3, 512 ])
 
-  myFunc(this.gridSystem.pos);
+    myFunc(this.gridSystem.pos)
   }
   // loadGpu (){
   //
@@ -341,7 +339,7 @@ class soPhysics {
     vel[ith][1] = 0
     vel[ith][2] = 0
 
-    if (names[jth] == 'star') {
+    if (names[jth] === 'star') {
       pos[jth][0] = 0
       pos[jth][1] = 0
       pos[jth][2] = 0
@@ -352,7 +350,7 @@ class soPhysics {
       acc[jth][1] = 0
       acc[jth][2] = 0
     }
-    if (names[ith] == 'star') {
+    if (names[ith] === 'star') {
       pos[ith][0] = 0
       pos[ith][1] = 0
       pos[ith][2] = 0
@@ -463,9 +461,9 @@ class soPhysics {
     let epsilon = 0.01
     if (this.metric) { this.convertToStellar() }
     for (let i = 0; i < this.gridSystem.count; i++) {
-      if (this.gridSystem.names[i] != 'DELETED') {
+      if (this.gridSystem.names[i] !== 'DELETED') {
         for (let j = 0; j < i; j++) {
-          if (this.gridSystem.names[j] != 'DELETED') {
+          if (this.gridSystem.names[j] !== 'DELETED') {
             this.accGravSingle(this.gridSystem.player, this.gridSystem.names, this.gridSystem.mass, this.gridSystem.pos, this.gridSystem.vel, this.gridSystem.acc, this.gridSystem.rad, i, j)
           }
         }
@@ -474,7 +472,7 @@ class soPhysics {
     this.calVelPosCuda()
     this.gridSystem.resetAcc()
     for (let i = 0; i < this.gridSystem.length; i++) {
-      if (this.gridSystem.names[i] == 'DELETED') {
+      if (this.gridSystem.names[i] === 'DELETED') {
         this.gridSystem.removeBody(i)
       }
     }
@@ -503,7 +501,7 @@ class System {
     this.bodies = []
     this.bodyDistance = abodyDistance
     this.bodySpeed = abodySpeed
-    if (seed != 0) {
+    if (seed !== 0) {
       this.build()
     } else {
       this.buildSol()
@@ -561,14 +559,14 @@ class System {
 
     // body name
     body_data.push(`body ${uuid()}`)
-    let min = 8.6 * Math.pow(10, -11)
-    let max = 0.00001
+    let min = 8.6 * Math.pow(10, -5)
+    let max = 24.0
 
-    let test = Math.random()
-    if (test >= 0.8) {
-      min = 0.00001
-      max = 0.01
-    }
+    // let test = Math.random()
+    // if (test >= 0.8) {
+    //   min = 0.00001
+    //   max = 0.01
+    // }
     let mass = randomUniform(min, max)
 
     body_data.push(mass)

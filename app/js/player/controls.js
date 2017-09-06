@@ -1,6 +1,6 @@
 import FlyControls from './controls/flyControls'
 
-const movementSpeedMultiplier = 25000000
+const movementSpeedMultiplier = 350000000
 
 const onScroll = ({ camera, controls, event }) => {
   const deltaY = event.wheelDeltaY
